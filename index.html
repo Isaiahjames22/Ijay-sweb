@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Quiz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: maroon;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .choices input {
+            margin-right: 10px;
+        }
+
+        .choices label {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: maroon;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+
+        .result {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            color: maroon;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>How Well Do You Know Me?</h1>
+    <div class="quiz-container">
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1. What's my favorite color?</p>
+            <div class="choices">
+                <label><input type="radio" name="q1" value="wrong"> Red</label>
+                <label><input type="radio" name="q1" value="correct"> Maroon</label>
+                <label><input type="radio" name="q1" value="wrong"> Green</label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2. What's my favorite food?</p>
+            <div class="choices">
+                <label><input type="radio" name="q2" value="wrong"> Adobo</label>
+                <label><input type="radio" name="q2" value="wrong"> Sinigang</label>
+                <label><input type="radio" name="q2" value="correct"> Tinola</label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. What's my favorite number?</p>
+            <div class="choices">
+                <label><input type="radio" name="q3" value="wrong"> 7</label>
+                <label><input type="radio" name="q3" value="wrong"> 11</label>
+                <label><input type="radio" name="q3" value="correct"> 22</label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4. Who's most sweet?</p>
+            <div class="choices">
+                <label><input type="radio" name="q4" value="correct"> Me</label>
+                <label><input type="radio" name="q4" value="wrong"> You</label>
+                <label><input type="radio" name="q4" value="wrong"> None of the above</label>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5. What’s my favorite hobby?</p>
+            <div class="choices">
+                <label><input type="radio" name="q5" value="wrong"> Painting</label>
+                <label><input type="radio" name="q5" value="correct"> Playing guitar</label>
+                <label><input type="radio" name="q5" value="wrong"> Reading books</label>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button onclick="submitQuiz()">Submit Answers</button>
+
+        <!-- Modal -->
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="resultText"></div>
+                <button onclick="proceedToReward()">Claim Reward</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const answers = document.querySelectorAll('input[type="radio"]:checked');
+            let score = 0;
+
+            answers.forEach((answer) => {
+                if (answer.value === 'correct') {
+                    score++;
+                }
+            });
+
+            const resultText = document.getElementById('resultText');
+            const resultModal = document.getElementById('resultModal');
+
+            // Prepare the result message
+            if (score === 5) {
+                resultText.textContent = "You got all answers right! You know me so well, Iloveyou Asawa ko! 💖";
+            } else if (score >= 3) {
+                resultText.textContent = "Almost there! You got " + score + " out of 5 correct! 😘";
+            } else {
+                resultText.textContent = "Oops! You might need to know me a little better... 😅";
+            }
+
+            // Show the modal
+            resultModal.style.display = "block";
+        }
+
+        function closeModal() {
+            const resultModal = document.getElementById('resultModal');
+            resultModal.style.display = "none";
+        }
+
+        function proceedToReward() {
+            // Redirect to the Surprise Messages page
+            window.location.href = "surprise.html";
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            const resultModal = document.getElementById('resultModal');
+            if (event.target === resultModal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>

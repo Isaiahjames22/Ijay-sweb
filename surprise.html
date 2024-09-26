@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Messages</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe4e1;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: #ff69b4;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .heart:hover {
+            transform: scale(1.1);
+        }
+
+        .heart p {
+            color: white;
+            font-size: 30px;
+            margin: 0;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #ff69b4;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Click on the Hearts to Reveal Your Surprise!</h1>
+
+    <div class="container">
+        <div class="heart" onclick="revealMessage(1)">
+            <p>❤️</p>
+        </div>
+        <div class="heart" onclick="revealMessage(2)">
+            <p>💖</p>
+        </div>
+        <div class="heart" onclick="revealMessage(3)">
+            <p>💘</p>
+        </div>
+        <div class="heart" onclick="revealMessage(4)">
+            <p>💕</p>
+        </div>
+        <div class="heart" onclick="revealMessage(5)">
+            <p>💓</p>
+        </div>
+    </div>
+
+    <!-- Message Display -->
+    <div id="message" class="message hidden"></div>
+
+    <footer>&copy; With my Mrs.Sungit</footer>
+
+    <script>
+        const messages = [
+            "You are my sunshine on the darkest days 🌞",
+            "I love you more than words can say 💖",
+            "I always pray for you and your family  🌸",
+            "I'm so thankful for having you in my life💕",
+            "I'm so blessed because, God answered my prayers 💞"
+        ];
+
+        function revealMessage(index) {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = messages[index - 1];
+            messageElement.classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
